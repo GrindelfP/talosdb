@@ -6,13 +6,13 @@ Named after Talos I station.
 ## Installation
 
 ```bash
-pip install src
+pip install talosdb
 ```
 
 ## Quickstart
 
 ```python
-from src import TalosDB
+from talosdb import TalosDB
 from itertools import product
 
 db = TalosDB("~/science/results")

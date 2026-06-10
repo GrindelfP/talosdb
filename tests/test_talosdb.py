@@ -1,5 +1,5 @@
 """
-Tests for src.
+Tests for talosdb.
 """
 import json
 import math
@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from src import TalosDB, Experiment, Run
+from talosdb import TalosDB, Experiment, Run
 
 
 # ---------------------------------------------------------------------------
@@ -32,25 +32,25 @@ def exp(db):
 
 class TestDirnameParsing:
     def test_basic_roundtrip(self):
-        from src import _params_to_dirname, _dirname_to_params
+        from talosdb import _params_to_dirname, _dirname_to_params
         params = {"A": 0.5, "beta": 1.0}
         assert _dirname_to_params(_params_to_dirname(params)) == params
 
     def test_int_value(self):
-        from src import _params_to_dirname, _dirname_to_params
+        from talosdb import _params_to_dirname, _dirname_to_params
         params = {"N": 100, "mode": 2}
         result = _dirname_to_params(_params_to_dirname(params))
         assert result == params
 
     def test_string_value(self):
-        from src import _params_to_dirname, _dirname_to_params
+        from talosdb import _params_to_dirname, _dirname_to_params
         params = {"solver": "euler", "A": 1.0}
         result = _dirname_to_params(_params_to_dirname(params))
         assert result == params
 
     def test_underscore_in_value(self):
         """Values containing underscores must not confuse the parser."""
-        from src import _params_to_dirname, _dirname_to_params
+        from talosdb import _params_to_dirname, _dirname_to_params
         params = {"method": "runge_kutta", "A": 0.5}
         dirname = _params_to_dirname(params)
         parsed  = _dirname_to_params(dirname)
@@ -58,7 +58,7 @@ class TestDirnameParsing:
         assert math.isclose(parsed["A"], 0.5)
 
     def test_sorted_keys(self):
-        from src import _params_to_dirname
+        from talosdb import _params_to_dirname
         d1 = _params_to_dirname({"beta": 1.0, "A": 0.5})
         d2 = _params_to_dirname({"A": 0.5, "beta": 1.0})
         assert d1 == d2
@@ -70,7 +70,7 @@ class TestDirnameParsing:
 
 class TestDatFormat:
     def _roundtrip(self, arr, tmp_path):
-        from src import _save_dat, _load_dat
+        from talosdb import _save_dat, _load_dat
         p = tmp_path / "test.dat"
         _save_dat(p, arr)
         return _load_dat(p)
@@ -101,7 +101,7 @@ class TestDatFormat:
 
     def test_human_readable(self, tmp_path):
         """The .dat file must be readable as plain text."""
-        from src import _save_dat
+        from talosdb import _save_dat
         arr = np.array([[1.0, 2.0], [3.0, 4.0]])
         p = tmp_path / "test.dat"
         _save_dat(p, arr)

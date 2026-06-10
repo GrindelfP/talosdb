@@ -1,5 +1,5 @@
 """
-src — lightweight experiment storage library.
+talosdb — lightweight experiment storage library.
 Named after Talos I station.
 
 Hierarchy:
@@ -260,7 +260,7 @@ class Run:
                 fig.savefig(save_path)
                 plt.close(fig)
 
-        src does not import matplotlib — all rendering is the caller's
+        talosdb does not import matplotlib — all rendering is the caller's
         responsibility. The library only provides the save path.
         """
         plot_fn(result, self._path / filename)
