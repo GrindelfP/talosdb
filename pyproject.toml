@@ -38,8 +38,5 @@ Homepage = "https://github.com/GrindelfP/talosdb"
 Repository = "https://github.com/GrindelfP/talosdb"
 "Bug Tracker" = "https://github.com/GrindelfP/talosdb/issues"
 
-[tool.setuptools.packages.find]
-where = ["talosdb"]
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
